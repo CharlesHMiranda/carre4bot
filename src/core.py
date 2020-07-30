@@ -61,21 +61,26 @@ def echo(bot):
             user = update.message.from_user
             chat_id = update.message.chat_id
             ### Tratar apenas mensagens de texto
-            if update.message.text != None:
-                update.message.reply_text(len(update.message.text))
-                newStr = charRemoveAndLower(update.message.text, "(!@#$%&*-_=+),.;/?|[]{}")
-                words = filter(None, newStr.split(" "))
-                for word in words:
-                    cursor = promos.find_one({'keywords': word})
-                    if cursor != None:
-                        slogan = cursor['slogan']
-                        emoticon = cursor['emoticon']
-                        link = cursor['link']
-                        update.message.reply_text(emoticon)
-                        update.message.reply_text(slogan)
-                        if link != "":
-                            update.message.reply_text(link)
-                        return
+            if update.message.text is not None:
+                ### Descartar "textões"
+                if len(update.message.text) < 200:
+                    ### Filtrar caracteres indesejados e transformar em "lowerCase"
+                    newStr = charRemoveAndLower(update.message.text, "(!@#$%&*-_=+),.;/?|[]{}")
+                    words = filter(None, newStr.split(" "))
+                    ### Efetuar uma busca no banco de dados para cada palavra da mensagem
+                    for word in words:
+                        cursor = promos.find_one({'keywords': word})
+                        if cursor is not None:
+                            ### Palavra encontrada! Apresentar campanha e retornar
+                            slogan = cursor['slogan']
+                            emoticon = cursor['emoticon']
+                            link = cursor['link']
+                            update.message.reply_text(emoticon)
+                            update.message.reply_text(slogan)
+                            ### Apresentar o link, caso preenchido
+                            if not link == "":
+                                update.message.reply_text(link)
+                            return
 
 
 

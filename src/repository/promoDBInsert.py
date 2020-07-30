@@ -6,7 +6,6 @@ import pymongo
 from conf.settings import TELEGRAM_TOKEN, MONGODB_URI
 
 ### Create seed data
-
 SEED_DATA = [
     {
         'campaign': '1',
