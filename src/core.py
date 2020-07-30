@@ -17,7 +17,7 @@ uri = MONGODB_URI
 ###----------------------------------------------------------------------------###
 
 def main():
-    global update_id, promos
+    global update_id, promos, campaign
 
     ### Telegram Bot Authorization Token
     bot = telegram.Bot(TELEGRAM_TOKEN)
@@ -35,6 +35,7 @@ def main():
     client = pymongo.MongoClient(uri)
     db = client.get_default_database()
     promos = db['promos']
+    campaign = db['campaign']
 
 
     while True:
@@ -51,7 +52,7 @@ def main():
 
 
 def echo(bot):
-    global update_id, promos
+    global update_id, promos, campaign
 
     ### Request updates after the last update_id
     for update in bot.get_updates(offset=update_id, timeout=10):
@@ -69,18 +70,25 @@ def echo(bot):
                     words = filter(None, newStr.split(" "))
                     ### Efetuar uma busca no banco de dados para cada palavra da mensagem
                     for word in words:
-                        cursor = promos.find_one({'keywords': word})
-                        if cursor is not None:
+                        cursorPromos = promos.find_one({'keywords': word})
+                        if cursorPromos is not None:
                             ### Palavra encontrada! Apresentar campanha e retornar
-                            slogan = cursor['slogan']
-                            emoticon = cursor['emoticon']
-                            link = cursor['link']
-                            update.message.reply_text(emoticon)
-                            update.message.reply_text(slogan)
-                            ### Apresentar o link, caso preenchido
-                            if not link == "":
-                                update.message.reply_text(link)
-                            return
+                            campaignPromos = cursorPromos['campaign']
+                            queryCampaign = {'id': datetime.datetime.now().strftime("%Y%m%d") + campaignPromos}
+                            cursorCampaign = campaign.find_one(queryCampaign)
+                            ### Apresentar campanha caso não tenha sido enviada hoje
+                            if cursorCampaign is None:
+                                sloganPromos = cursorPromos['slogan']
+                                emoticonPromos = cursorPromos['emoticon']
+                                linkPromos = cursorPromos['link']
+                                update.message.reply_text(emoticonPromos)
+                                update.message.reply_text(sloganPromos)
+                                ### Apresentar o link, caso preenchido
+                                if not linkPromos == "":
+                                    update.message.reply_text(linkPromos)
+                                ### Registrar que a campanha já foi enviada hoje
+                                campaign.insert_one(queryCampaign)
+                                return
 
 
 
