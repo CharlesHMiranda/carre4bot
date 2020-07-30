@@ -69,9 +69,9 @@ SEED_DATA = [
 ### Inserir a URI que está armazenada no arquivo conf/.env
 uri = MONGODB_URI
 
-###----------------------------------------------------------------------------###
+######################################################################
 ### main
-###----------------------------------------------------------------------------###
+######################################################################
 
 def main():
     ### Estabelecer conexão com o banco de dados
@@ -88,6 +88,7 @@ def main():
     ### Fechar a conexão com o banco de dados
     client.close()
 
+######################################################################
 
 if __name__ == '__main__':
     print("Inserindo dados no banco de dados...\n")
