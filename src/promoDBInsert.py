@@ -13,7 +13,7 @@ SEED_DATA = [
         'name': 'Descontos',
         'emoticon': '[̲̅$̲̅(ツ)$̲̅]',
         'slogan': 'Aqui tem muitos descontos!!! Aproveite e faça seu pedido online!  http://www.carrefour.com.br',
-        'keywords': ['desc', 'desconto', 'descontão', 'descontinho', 'preco', 'preço', 'precinho'],
+        'keywords': ['carrefour', 'desc', 'desconto', 'descontos', 'descontao', 'descontão', 'descontinho', 'preco', 'preço', 'precinho'],
         'link': ''
     },
     {
@@ -21,15 +21,15 @@ SEED_DATA = [
         'name': 'Cervejas',
         'emoticon': '¯\_(ツ)_/¯',
         'slogan': 'Alguém falou em cerveja? Em fds??? Vem pro Carrefour buscar a sua!',
-        'keywords': ['breja', 'brejas', 'cerva', 'cerveja', 'cervejas', 'sextou', 'sextamos', 'happyhour'],
-        'link': 'https://www.carrefour.com.br/Cerveja-Eisenbahn-Pilsen-350ml/p/9942815'
+        'keywords': ['fds', 'breja', 'brejas', 'cerva', 'cervas', 'cerveja', 'cervejas', 'sextou', 'sextamos', 'happyhour'],
+        'link': 'https://www.carrefour.com.br/cervejas?crfint=hm-tlink|mercado|bebidas-alcoolicas-e-nao-alcoolicas|2|cervejas|2'
     },
     {
         'campaign': '3',
         'name': 'Infantil',
         'emoticon': '=^._.^=',
         'slogan': 'Tudo de melhor para a sua Fofura! Confira as promoções incríveis no site!  http://www.carrefour.com.br',
-        'keywords': ['bebe', 'bebê', 'baby', 'filhote', 'fofo', 'fofa', 'fofura', 'fofolete'],
+        'keywords': ['bebe', 'bebê', 'baby', 'filhota', 'filhote', 'fofa', 'fofo', 'fofura', 'fofuras', 'fofolete'],
         'link': ''
     },
     {
@@ -37,7 +37,7 @@ SEED_DATA = [
         'name': 'Churrasco',
         'emoticon': 'ᕦ(ツ)ᕤ',
         'slogan': 'Pensou em churras, pensou Carrefour!!! Faça seu pedido online e aproveite as melhores ofertas!',
-        'keywords': ['churras', 'churrasco', 'carvão', 'carvao', 'brasa', 'picanha', 'carne', 'carnes'],
+        'keywords': ['churra', 'churras', 'churrasco', 'churrascao', 'churrascão', 'carvao', 'carvão', 'brasa', 'picanha', 'carne', 'carnes'],
         'link': 'https://www.carrefour.com.br/cf-promo-churrasco-em-casa-0620?crfimt=home|carrefour|bn|bnd|churrasco-em-casa_churrasco-em-casa-com-ate-25off_oferta_mercado_carrefour-e_300720|&cfrict=churrasco-em-casa'
     },
     {
@@ -45,15 +45,24 @@ SEED_DATA = [
         'name': 'Padaria',
         'emoticon': '( ͡° ͜ʖ ͡°)',
         'slogan': 'Quer pãozinho sempre fresquinho? Aqui tem! Vem pro Carrefour!  http://www.carrefour.com.br',
-        'keywords': ['pão', 'pao', 'padaria', 'paozinho', 'bisnaga', 'bisnaguinha', 'cacetinho', 'bolo'],
+        'keywords': ['pao', 'pão', 'padaria', 'paozinho', 'pãozinho', 'bisnaga', 'bisnaguinha', 'cacetinho', 'bolo'],
         'link': ''
     },
     {
         'campaign': '6',
+        'name': 'Aniversário',
+        'emoticon': '♪♫*•♪',
+        'slogan': 'Parabéns! Parabéns para você! E muitas felicidades!!! Aproveite o seu dia e venha comemorar com a gente!  http://www.carrefour.com.br',
+        'keywords': ['parabens', 'parabéns', 'felicidade', 'felicidades', 'aniversario', 'aniversário'],
+        'link': ''
+    },
+    {
+        'campaign': '7',
         'name': 'Dia dos Pais',
-        'emoticon': '٩(♡ε♡ )۶',
+        'emoticon': 'ლ(´ڡ`ლ)',
         'slogan': 'Seu Pai merece tudo de bom!!! Vem comprar um presentão pra ele no Carrefour!',
-        'keywords': ['pai', 'pais', 'paizão', 'paizao', 'orgulho', 'merece', 'presente', 'presentão', 'presentao'],
+        'keywords': ['pai', 'papai', 'pais', 'paizao', 'paizão', 'orgulho', 'merece', 'presente', 'presentao',
+                     'presentão'],
         'link': 'https://www.carrefour.com.br/dia-dos-pais?crfimt=hm-tlink|carrefour|menu|campanha|dia-dos-pais|5|270720'
     }
 ]
@@ -61,21 +70,21 @@ SEED_DATA = [
 ### Inserir a URI que está armazenada no arquivo conf/.env
 uri = MONGODB_URI
 
-#----------------------------------------------------------------------------#
-# main
-#----------------------------------------------------------------------------#
+###----------------------------------------------------------------------------###
+### main
+###----------------------------------------------------------------------------###
 
 def main():
+    ### Estabelecer conexão com o banco de dados
     client = pymongo.MongoClient(uri)
     db = client.get_default_database()
-
     promos = db['promos']
-
-    # Inserir os dados na coleção "promos" no banco de dados MongoDB
-    promos.insert_many(SEED_DATA)
 
     ### Drop para utilização na fase de desenvolvimento da aplicação
     ### db.drop_collection('promos')
+
+    ### Inserir os dados na coleção "promos" no banco de dados MongoDB
+    promos.insert_many(SEED_DATA)
 
     ### Fechar a conexão com o banco de dados
     client.close()
