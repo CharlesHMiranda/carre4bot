@@ -71,7 +71,7 @@ def listenConversation(bot):
                     ### Filtrar caracteres indesejados e transformar em minúsculas
                     newStr = charRemoveAndLower(update.message.text, "(!@#$%&*-_=+),.;/?|[]{}")
                     words = filter(None, newStr.split(" "))
-                    ### Efetuar uma busca no banco de dados para cada palavra da mensagem
+                    ### Efetuar uma busca no banco de dados de promoções para cada palavra da mensagem
                     for word in words:
                         cursorPromos = promos.find_one({'keywords': word})
                         if cursorPromos is not None:
