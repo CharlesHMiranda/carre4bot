@@ -63,11 +63,12 @@ def echo(bot):
                     cursor = promos.find_one({'keywords': word})
                     if cursor != None:
                         slogan = cursor['slogan']
-                        shortMessage = cursor['message']
+                        emoticon = cursor['emoticon']
                         link = cursor['link']
-                        update.message.reply_text(shortMessage)
+                        update.message.reply_text(emoticon)
                         update.message.reply_text(slogan)
-                        # update.message.reply_text(link)
+                        if link != "":
+                            update.message.reply_text(link)
                         return
 
 
