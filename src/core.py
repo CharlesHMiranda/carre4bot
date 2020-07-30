@@ -75,7 +75,7 @@ def echo(bot):
                         if cursorPromos is not None:
                             ### Palavra encontrada! Apresentar campanha e retornar
                             campaignPromos = cursorPromos['campaign']
-                            queryCampaign = {'id': chat_id + datetime.datetime.now().strftime("%Y%m%d") + campaignPromos}
+                            queryCampaign = {'id': str(chat_id) + datetime.datetime.now().strftime("%Y%m%d") + campaignPromos}
                             cursorCampaign = campaign.find_one(queryCampaign)
                             ### Apresentar campanha caso não tenha sido enviada hoje
                             if cursorCampaign is None:

@@ -3,7 +3,7 @@
 
 import sys
 import pymongo
-from conf.settings import TELEGRAM_TOKEN, MONGODB_URI
+from src.conf.settings import TELEGRAM_TOKEN, MONGODB_URI
 
 ### Create seed data
 SEED_DATA = [
@@ -52,7 +52,7 @@ SEED_DATA = [
         'name': 'Aniversário',
         'emoticon': '♪♫*•♪',
         'slogan': 'Parabéns! Parabéns para você! E muitas felicidades!!! Aproveite o seu dia e venha comemorar com a gente!  http://www.carrefour.com.br',
-        'keywords': ['parabens', 'parabéns', 'felicidade', 'felicidades', 'aniversario', 'aniversário'],
+        'keywords': ['niver', 'parabens', 'parabéns', 'felicidade', 'felicidades', 'aniversario', 'aniversário'],
         'link': ''
     },
     {
