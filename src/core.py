@@ -18,7 +18,7 @@ uri = MONGODB_URI
 ######################################################################
 
 def main():
-    global update_id, promos, campaign
+    global update_id, campaign, campaignLog
 
     ### Telegram Bot Authorization Token
     bot = telegram.Bot(TELEGRAM_TOKEN)
@@ -35,8 +35,8 @@ def main():
     ### Estabelecer conexão com o banco de dados
     client = pymongo.MongoClient(uri)
     db = client.get_default_database()
-    promos = db['promos']
     campaign = db['campaign']
+    campaignLog = db['campaignlog']
 
     while True:
         try:
@@ -55,7 +55,7 @@ def main():
 
 
 def listenConversation(bot):
-    global update_id, promos, campaign
+    global update_id, campaign, campaignLog
 
     ### Request updates after the last update_id
     for update in bot.get_updates(offset=update_id, timeout=10):
@@ -71,27 +71,28 @@ def listenConversation(bot):
                     ### Filtrar caracteres indesejados e transformar em minúsculas
                     newStr = charRemoveAndLower(update.message.text, "(!@#$%&*-_=+),.;/?|[]{}")
                     words = filter(None, newStr.split(" "))
-                    ### Efetuar uma busca no banco de dados de promoções para cada palavra da mensagem
+                    ### Efetuar uma busca no banco de dados de Campanhas para cada palavra da mensagem
                     for word in words:
-                        cursorPromos = promos.find_one({'keywords': word})
-                        if cursorPromos is not None:
-                            ### Palavra encontrada! Verificar se campanha já foi enviada hoje
-                            campaignPromos = cursorPromos['campaign']
-                            queryCampaign = {'id': str(chat_id) + datetime.datetime.now().strftime("%Y%m%d") + campaignPromos}
-                            cursorCampaign = campaign.find_one(queryCampaign)
-                            ### Apresentar a campanha e retornar
-                            if cursorCampaign is None:
-                                sloganPromos = cursorPromos['slogan']
-                                emoticonPromos = cursorPromos['emoticon']
-                                linkPromos = cursorPromos['link']
-                                update.message.reply_text(emoticonPromos)
-                                update.message.reply_text(sloganPromos)
+                        cursorCampaign = campaign.find_one({'keywords': word})
+                        if cursorCampaign is not None:
+                            ### Palavra encontrada nas palavras-chaves da Campanha!
+                            campaignId = cursorCampaign['campaign']
+                            queryCampaignLog = {'id': str(chat_id) + datetime.datetime.now().strftime("%Y%m%d") + campaignId}
+                            cursorCampaignLog = campaignLog.find_one(queryCampaignLog)
+                            ### Verificar se Campanha já foi enviada hoje
+                            if cursorCampaignLog is None:
+                                ### Apresentar a Campanha e retornar
+                                sloganCampaign = cursorCampaign['slogan']
+                                emoticonCampaign = cursorCampaign['emoticon']
+                                linkCampaign = cursorCampaign['link']
+                                update.message.reply_text(emoticonCampaign)
+                                update.message.reply_text(sloganCampaign)
                                 ### Apresentar o link, caso preenchido
-                                if linkPromos is not "":
-                                    update.message.reply_text(linkPromos)
+                                if linkCampaign is not "":
+                                    update.message.reply_text(linkCampaign)
                                 ### Registrar que a campanha já foi enviada hoje
                                 ### Query = chat_id + dataInvertida + campanha
-                                campaign.insert_one(queryCampaign)
+                                campaignLog.insert_one(queryCampaignLog)
                                 return
 
 

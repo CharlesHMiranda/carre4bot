@@ -12,8 +12,8 @@ O **bot** está hospedado como um aplicativo (app) no repositório **Heroku**, e
 
 | Nome           | Tipo             | Descrição                                                                                                                              |
 | -------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| campaign       | log (registro)   | Registra o envio de campanhas para aquele usuário ou grupo. Sua chave de acesso é: "chat_id + data + campanha"                         |
-| promos         | descritivo       | Campanhas ativas, cada documento contém a identificação da campanha, palavras-chaves e uma URL do e-commerce do Carrefour.             |
+| campaignlog    | log (registro)   | Registra o envio de campanhas para aquele usuário ou grupo. Sua chave de acesso é: "chat_id + data + campanha"                         |
+| campaign       | descritivo       | Campanhas cadastradas, cada documento contém a identificação da campanha, palavras-chaves e uma URL do e-commerce do Carrefour.        |
 
 
 #### Exemplo de consumo da execução da aplicação na nuvem do `Heroku`

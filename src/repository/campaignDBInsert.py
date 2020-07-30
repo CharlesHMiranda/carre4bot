@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Criar a Collection de Promoções em um banco de dados MongoDB hospedado em mongodb.com
+# Criar a Collection de Campanhas em um banco de dados MongoDB hospedado Nuvem
 
 import sys
 import pymongo
@@ -77,13 +77,13 @@ def main():
     ### Estabelecer conexão com o banco de dados
     client = pymongo.MongoClient(uri)
     db = client.get_default_database()
-    promos = db['promos']
+    campaign = db['campaign']
 
     ### Drop para utilização na fase de desenvolvimento da aplicação
-    ### db.drop_collection('promos')
+    ### db.drop_collection('campaign')
 
-    ### Inserir os dados na coleção "promos" no banco de dados MongoDB
-    promos.insert_many(SEED_DATA)
+    ### Inserir os dados na coleção "campaign" no banco de dados MongoDB
+    campaign.insert_many(SEED_DATA)
 
     ### Fechar a conexão com o banco de dados
     client.close()
@@ -91,5 +91,5 @@ def main():
 ######################################################################
 
 if __name__ == '__main__':
-    print("Inserindo dados no banco de dados...\n")
+    print("Inserindo dados noa Coleção Campaign...\n")
     main()
