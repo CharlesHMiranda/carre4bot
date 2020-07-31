@@ -75,7 +75,7 @@ def listenConversation(bot):
                     for word in words:
                         cursorCampaign = campaign.find_one({'keywords': word})
                         if cursorCampaign is not None:
-                            ### Palavra encontrada nas palavras-chaves da Campanha
+                            ### Palavra encontrada nas palavras-chave da Campanha
                             ### Verificar se Campanha já foi enviada hoje
                             campaignId = cursorCampaign['campaign']
                             queryCampaignLog = {'id': str(chat_id) + datetime.datetime.now().strftime("%Y%m%d") + campaignId}
