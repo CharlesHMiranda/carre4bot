@@ -20,7 +20,7 @@ SEED_DATA = [
         'name': 'Cervejas',
         'emoticon': '¯\_(ツ)_/¯',
         'slogan': 'Alguém falou em cerveja? Em fds??? Vem pro Carrefour buscar a sua!',
-        'keywords': ['fds', 'breja', 'brejas', 'cerva', 'cervas', 'cerveja', 'cervejas', 'sextou', 'sextamos', 'happyhour'],
+        'keywords': ['fds', 'beer', 'breja', 'brejas', 'cerva', 'cervas', 'cerveja', 'cervejas', 'cerveza', 'cevada', 'sextou', 'sextamos', 'happyhour'],
         'link': 'https://www.carrefour.com.br/cervejas?crfint=hm-tlink|mercado|bebidas-alcoolicas-e-nao-alcoolicas|2|cervejas|2'
     },
     {
@@ -63,6 +63,14 @@ SEED_DATA = [
         'keywords': ['pai', 'papai', 'pais', 'paizao', 'paizão', 'orgulho', 'merece', 'presente', 'presentao',
                      'presentão'],
         'link': 'https://www.carrefour.com.br/dia-dos-pais?crfimt=hm-tlink|carrefour|menu|campanha|dia-dos-pais|5|270720'
+    },
+    {
+        'campaign': '8',
+        'name': 'Empréstimo Pessoal',
+        'emoticon': '[̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅]',
+        'slogan': 'Coloque os seus projetos em prática, sem burocracia, com uma das taxas mais competitivas do mercado!',
+        'keywords': ['emprestimo', 'empréstimo', 'credito', 'crédito', 'sonho', 'sonhos', 'grana', 'dinheiro'],
+        'link': 'https://www.carrefoursolucoes.com.br/credito-pessoal'
     }
 ]
 
@@ -91,5 +99,5 @@ def main():
 ######################################################################
 
 if __name__ == '__main__':
-    print("\nInserindo dados noa Coleção Campaign...\n")
+    print("\nInserindo dados na Coleção Campaign...\n")
     main()
