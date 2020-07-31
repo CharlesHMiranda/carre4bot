@@ -23,14 +23,14 @@ se concretize no curto prazo.
 Tendo essas premissas como um norte, uma direção a ser seguida, as escohas foram **Python**, **MongoDb** (bd e nuvem) e **Heroku** para hospedar o aplicativo. 
 
 carre**4**bot foi desenvolvido tendo em mente a necessidade de performance. Seu código busca a linearidade para oferecer o menor tempo de resposta possível, 
-faz uso de apenas duas pequenas coleções em um banco de dados **MongoDB** na nuvem - sendo a primera, uma coleção de campanhas, suas palavras-chave, 
-um _emoticon_ e a mensagem/link promocional. A segunda coleção é apenas um registro de campanhas enviadas no dia por _chat_id_ (trata-se de uma coleção que pode 
+sua estrutura é simples e lastreada em dois conjuntos de _try/catch_ (o último dentro de um _loop_ infinito), faz uso de apenas duas pequenas coleções em um banco de dados **MongoDB** na nuvem - sendo a primeira, uma coleção de campanhas, suas palavras-chave, 
+um _emoticon_ e a mensagem/link promocional e a segunda coleção é apenas um registro de campanhas enviadas no dia por _chat_id_ (trata-se de uma coleção que pode 
 ser esvaziada diariamente, removendo-se os registros do dia anterior) - e os códigos-fonte estão hospedados no [GitHub](https://github.com/CharlesHMiranda/carre4bot).
 
 
 ## Próximos passos
 
-Estou desenvolvendo o front-end CRUD para gerenciar a coleção de campanhas, com todas as validações de entrada de dados necessárias, baseado em Angular 8, JavaScript e Node.js.
+Estou desenvolvendo o _fullstack CRUD_ para gerenciar a coleção de campanhas, com todas as validações de entrada de dados necessárias, baseado em Angular 8, JavaScript e Node.js.
 
 Pretendo, ainda, e mais para a frente, me aprofundar em Inteligência Artificial e fazer uso do _Deep Learning_ para que o robô ofereça um diálogo ainda mais _humanizado_ com seus usuários.
 
@@ -39,11 +39,11 @@ Pretendo, ainda, e mais para a frente, me aprofundar em Inteligência Artificial
 O **bot**, após ser inserido no grupo ou no _chat_, restringe o seu funcionamento ao monitoramento das mensagens de texto trocadas entre os participantes daquela conversa. 
 Ele descarta todos os demais envios, tais como: imagens, vídeos, figuras animadas e textos com mais de 250 caracteres (os famosos "textões" que quase ninguém lê).
 
-Em seguida, elimina-se todos os caracteres especiais que podem comprometer as _queries_ ao banco de dados, toda a cadeia de palavras é convertida para minúsculas e 
+Em seguida, remove todos os caracteres especiais que podem comprometer as _queries_ ao banco de dados, toda a cadeia de palavras é convertida para minúsculas e 
 suas palavras separadas e inseridas em um _array_ iterável.
 
 Cada elemento do _array_ fará parte de uma _query_ a ser formulada às palavras-chave das Campanhas. Por questões de performance, o aplicativo limita-se a buscar apenas 
-pela primeira pesquisa atendida, verifica se a mensagem já foi enviada naquele dia e naquele _chat_ e retorna ao seu estado de monitoramento.
+pela primeira pesquisa atendida, envia a mensagem caso ainda não tenha sido exibida naquele dia e naquele _chat_ e retorna ao seu estado de monitoramento.
 
 Tal comportamento é necessário para não incomodar os participantes com um possível excesso de intervenções do "robô" nas conversas ou nos grupos. Evitando, assim, que seja removido pelos seus usuários.
 O objetivo a ser alcançado é que sua participação seja **leve** e **divertida**.
