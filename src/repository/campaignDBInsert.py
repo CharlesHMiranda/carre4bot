@@ -91,5 +91,5 @@ def main():
 ######################################################################
 
 if __name__ == '__main__':
-    print("Inserindo dados noa Coleção Campaign...\n")
+    print("\nInserindo dados noa Coleção Campaign...\n")
     main()

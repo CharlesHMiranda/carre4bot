@@ -68,7 +68,7 @@ def listenConversation(bot):
             if update.message.text is not None:
                 ### Descartar "textões" - Tratar apenas mensagens com menos de 250 caracteres
                 if len(update.message.text) < 250:
-                    ### Filtrar caracteres indesejados e transformar em minúsculas
+                    ### Filtrar caracteres indesejados e transformar texto em minúsculas
                     newStr = charRemoveAndLower(update.message.text, "(!@#$%&*-_=+),.;/?|[]{}")
                     words = filter(None, newStr.split(" "))
                     ### Efetuar uma busca no banco de dados de Campanhas para cada palavra da mensagem

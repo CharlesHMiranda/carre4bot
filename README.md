@@ -51,8 +51,10 @@ O objetivo a ser alcançado é que sua participação seja **leve** e **divertid
 O **App** está hospedado como um aplicativo no repositório **Heroku**, encontra-se em execução 24/7 e, portanto,  pode ser adicionado ao seu 
 grupo familiar ou profissional no _Telegram_ por meio do nome: **@carre4bot**
 
+Para aferir o desempenho do "robô" é necessário conhecer as palavras-chave monitoradas que estão descritas no arquivo`campaignDBInsert.py`, na pasta `src/repository`, 
+responsável pela inserção da massa de testes no banco de dados.
 
-### As coleções utilizadas em um banco de dados MongoDB são:
+### As coleções utilizadas em banco de dados MongoDB são:
 
 | Nome           | Tipo             | Descrição                                                                                                                                |
 | -------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
