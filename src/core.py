@@ -75,11 +75,11 @@ def listenConversation(bot):
                     for word in words:
                         cursorCampaign = campaign.find_one({'keywords': word})
                         if cursorCampaign is not None:
-                            ### Palavra encontrada nas palavras-chaves da Campanha!
+                            ### Palavra encontrada nas palavras-chaves da Campanha
+                            ### Verificar se Campanha já foi enviada hoje
                             campaignId = cursorCampaign['campaign']
                             queryCampaignLog = {'id': str(chat_id) + datetime.datetime.now().strftime("%Y%m%d") + campaignId}
                             cursorCampaignLog = campaignLog.find_one(queryCampaignLog)
-                            ### Verificar se Campanha já foi enviada hoje
                             if cursorCampaignLog is None:
                                 ### Apresentar a Campanha e retornar
                                 sloganCampaign = cursorCampaign['slogan']
@@ -91,7 +91,7 @@ def listenConversation(bot):
                                 if linkCampaign is not "":
                                     update.message.reply_text(linkCampaign)
                                 ### Registrar que a campanha já foi enviada hoje
-                                ### Query = chat_id + dataInvertida + campanha
+                                ### Query = chat_id + dataInvertida + campanhaId
                                 campaignLog.insert_one(queryCampaignLog)
                                 return
 
