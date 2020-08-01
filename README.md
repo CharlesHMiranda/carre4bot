@@ -56,7 +56,7 @@ Alguns exemplos: Niver, Churrasco, Fofura, Happy-Hour, Paizão, Pão, Cerva, Par
 
 | Nome           | Tipo             | Descrição                                                                                                                                |
 | -------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| campaignlog    | log (registro)   | Registra o envio de campanhas para aquele usuário ou grupo. Sua chave de acesso é: "chat_id + data_atual + campanhaId"                   |
+| campaignlog    | log (registro)   | Registra o envio de campanhas para aquele usuário ou grupo. Sua chave de acesso é: "data_atual + campanhaId + chat_id"                   |
 | campaign       | descritivo       | Cada documento contém a identificação da campanha, palavras-chave, mensagem e uma URL do e-commerce do Carrefour.|
 
 ### Descrição da _Coleção_ `campaign`
@@ -74,7 +74,7 @@ Alguns exemplos: Niver, Churrasco, Fofura, Happy-Hour, Paizão, Pão, Cerva, Par
 
 | Nome     | Descrição                                   |
 | -------- | ------------------------------------------- |
-| id       | chat_id + dataInvertida + CampanhaId        |
+| id       | dataInvertida + CampanhaId + chat_id        |
 
 
 #### Exemplo de consumo da execução da aplicação na nuvem do `Heroku`

@@ -86,6 +86,11 @@ def main():
     client = pymongo.MongoClient(uri)
     db = client.get_default_database()
     campaign = db['campaign']
+    campaignlog = db['campaignlog']
+
+    ### Criar Indices para suportarem as queries
+    campaign.create_index([("keywords", 1)])
+    campaignlog.create_index([("id", 1)])
 
     ### Drop para utilização na fase de desenvolvimento da aplicação
     ### db.drop_collection('campaign')

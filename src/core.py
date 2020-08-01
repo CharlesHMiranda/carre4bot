@@ -78,7 +78,7 @@ def listenConversation(bot):
                             ### Palavra encontrada nas palavras-chave da Campanha
                             ### Verificar se Campanha já foi enviada hoje
                             campaignId = cursorCampaign['campaign']
-                            queryCampaignLog = {'id': str(chat_id) + datetime.datetime.now().strftime("%Y%m%d") + campaignId}
+                            queryCampaignLog = {'id': datetime.datetime.now().strftime("%Y%m%d") + campaignId + str(chat_id)}
                             cursorCampaignLog = campaignLog.find_one(queryCampaignLog)
                             if cursorCampaignLog is None:
                                 ### Apresentar a Campanha e retornar
@@ -91,7 +91,7 @@ def listenConversation(bot):
                                 if linkCampaign is not "":
                                     update.message.reply_text(linkCampaign)
                                 ### Registrar que a campanha já foi enviada hoje
-                                ### Query = chat_id + dataInvertida + campanhaId
+                                ### Query = dataInvertida + campanhaId + chat_id
                                 campaignLog.insert_one(queryCampaignLog)
                                 return
 
